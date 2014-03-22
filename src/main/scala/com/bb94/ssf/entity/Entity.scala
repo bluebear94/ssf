@@ -13,7 +13,10 @@ trait Entity extends Event with Renderable {
   def y_=(newY: Double) = _y = newY
   def hitbox: Hitbox
   private var _mfr = false
-  def markForRemoval() = _mfr = true
+  def markForRemoval() = {
+    _mfr = true
+    onDestroy()
+  }
   def isMFR = _mfr
   def addToStage(s: Stage)
   

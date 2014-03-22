@@ -17,10 +17,12 @@ abstract class Game(title: String = "Unnamed shooter",
   statsWindow: Rectangle = Rectangle(Point(0.7, 0.0), Point(1.0, 1.0)),
   width: Int = 800,
   height: Int = 600) extends Renderable {
-
+  
+  Game.width = width
+  Game.height = height
   val aspectRatio = gameWindow.height / gameWindow.width
   
-  def glVertex2fRelative(x: Double, y: Double) = GL11.glVertex2d(x * width, y * height)
+  
   
   private var _difficulty: Int = _
   def difficulty = _difficulty
@@ -96,6 +98,11 @@ abstract class Game(title: String = "Unnamed shooter",
   def renderStage() = {
     arcs(currArc).stage(currStage).render(gameWindow)
   }
+}
+object Game {
+  var width: Int = 800
+  var height: Int = 600
+  def glVertex2fRelative(x: Double, y: Double) = GL11.glVertex2d(x * width, y * height)
 }
 
 /*class TestGame extends Game {

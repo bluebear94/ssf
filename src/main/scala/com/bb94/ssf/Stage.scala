@@ -24,6 +24,10 @@ abstract class Stage extends Event with Renderable {
     bosses.foreach(_.step(delta))
     enemies.foreach(_.step(delta))
     player.step(delta)
+    playerBullets = playerBullets.filterNot(_.isMFR)
+    enemyBullets = enemyBullets.filterNot(_.isMFR)
+    bosses = bosses.filterNot(_.isMFR)
+    enemies = enemies.filterNot(_.isMFR)
   }
   def render(bounds: Rectangle) = {
     playerBullets.foreach(_.render(bounds))
