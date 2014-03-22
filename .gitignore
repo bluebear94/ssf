@@ -1,5 +1,7 @@
-target/
-libs
+# Unmanaged dependencies
+
+lib
+
 # Created by http://gitignore.io
 
 ### Scala ###
