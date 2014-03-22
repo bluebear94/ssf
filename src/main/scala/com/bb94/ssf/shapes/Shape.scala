@@ -34,4 +34,7 @@ object Shape {
       case c: Circle => Circle(f(c.c, r), c.r * r.width)
     }
   }
+  def distancesq(a: Point, b: Point) = {
+    Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2)
+  }
 }

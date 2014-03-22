@@ -73,14 +73,16 @@ abstract class Game(title: String = "Unnamed shooter",
       Display.sync(Framerate.FRAMERATE)
       Framerate.updateFPS()
       val delta = Framerate.getDelta
+      
+      render(Shape.WHOLE_SCN)
     }
     Display.destroy()
   }
-
+  
 }
 
 class TestGame extends Game {
-  def render() = {
+  def render(bounds: Rectangle) = {
     
   }
   def onDeath() = {
