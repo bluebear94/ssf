@@ -15,5 +15,6 @@ trait Entity extends Event with Renderable {
   private var _mfr = false
   def markForRemoval() = _mfr = true
   def isMFR = _mfr
+  def addToStage(s: Stage)
   
 }
