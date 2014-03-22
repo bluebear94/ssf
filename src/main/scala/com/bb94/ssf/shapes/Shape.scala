@@ -16,14 +16,14 @@ object Shape {
     val rbr = r.br
     val w = r.width
     Point(rtl.x + w * p.x,
-          rtl.y + w * p.y)
+      rtl.y + w * p.y)
   }
   def unmapPoint(p: Point, r: Rectangle): Point = {
     val rtl = r.tl
     val rbr = r.br
     val w = r.width
     Point((p.x - rtl.x) / w,
-          (p.y - rtl.y) / w)
+      (p.y - rtl.y) / w)
   }
   def applyToShapes(s: Shape, r: Rectangle, f: (Point, Rectangle) => Point): Shape = {
     s match {
@@ -37,4 +37,17 @@ object Shape {
   def distancesq(a: Point, b: Point) = {
     Math.pow(b.x - a.x, 2) + Math.pow(b.y - a.y, 2)
   }
+}
+case class Vector(x: Double, y: Double) {
+  def +(that: Vector) = Vector(x + that.x, y + that.y)
+  def -(that: Vector) = Vector(x - that.x, y - that.y)
+  def *(that: Double) = Vector(that * x, that * y)
+  def dot(that: Vector) = x * that.x + y * that.y
+  def proj(that: Vector) = {
+    that * ((this dot that) / (that dot that))
+  }
+  def abs = Math.sqrt(this dot this)
+}
+object Vector {
+  implicit def p2v(p: Point) = Vector(p.x, p.y)
 }
