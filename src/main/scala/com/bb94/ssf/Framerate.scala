@@ -5,13 +5,12 @@ import org.lwjgl.Sys
 object Framerate {
   val FRAMERATE = 60
   private var lastFrame: Long = getTime
-  var delta: Int = 0
   def getTime = {
     Sys.getTime * 1000 / Sys.getTimerResolution
   }
   def getDelta = {
     val time = getTime
-    delta = (getTime - lastFrame).toInt
+    val delta = (getTime - lastFrame).toInt
     lastFrame = time
     delta
   }
