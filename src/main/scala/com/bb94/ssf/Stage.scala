@@ -12,6 +12,10 @@ abstract class Stage extends Event with Renderable {
   
   protected val _stageName = "Unnamed stage"
   private val stw: Rectangle = Rectangle(Point(0, 0), Point(0.7, 1))
-  private var entities: List[Entity] = Nil
+  private var playerBullets: List[Entity] = Nil
+  private var enemyBullets: List[Entity] = Nil
+  private var player: Entity = _
+  private var enemies: List[Entity] = Nil
+  private var bosses: List[Entity] = Nil
   
 }

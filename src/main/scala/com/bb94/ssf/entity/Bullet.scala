@@ -4,4 +4,6 @@ import com.bb94.ssf.hitbox.Hitbox
 
 trait Bullet extends Entity {
   
+  def damage: Int
+  
 }

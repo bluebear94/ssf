@@ -11,6 +11,8 @@ import org.lwjgl._
 abstract class Game(title: String = "Unnamed shooter",
   maxLife: Int = 10,
   startLife: Int = 3,
+  maxSpellcard: Int = 10,
+  startSpellcard: Int = 3,
   gameWindow: Rectangle = Rectangle(Point(0.0, 0.0), Point(0.7, 1.0)),
   statsWindow: Rectangle = Rectangle(Point(0.7, 0.0), Point(1.0, 1.0)),
   width: Int = 800,
@@ -28,6 +30,9 @@ abstract class Game(title: String = "Unnamed shooter",
   private var _currArc: Int = _
   def currArc = _currArc
   protected def currArc_=(newS: Int) = _currArc = newS
+  protected val arcs: Array[StageArc]
+  private var _currStage: Int = _
+  def currStage = _currStage
 
   private var _score: BigInt = 0
   def score = _score
@@ -46,10 +51,15 @@ abstract class Game(title: String = "Unnamed shooter",
     onDeath()
     if (_life == 0) onGameOver()
   }
+  private var _spellcard: Int = startSpellcard
+  def spellcard = _spellcard
+  
   /**
    * Behavior on death.
    */
-  def onDeath()
+  def onDeath() {
+    _spellcard += 1
+  }
   /**
    * Behavior on losing all lives.
    */
@@ -62,7 +72,10 @@ abstract class Game(title: String = "Unnamed shooter",
       Display.create()
     }
     catch {
-      case e: LWJGLException => e.printStackTrace()
+      case e: LWJGLException => {
+        e.printStackTrace()
+        exit(-1)
+      }
     }
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity();
@@ -75,13 +88,17 @@ abstract class Game(title: String = "Unnamed shooter",
       val delta = Framerate.getDelta
       
       render(Shape.WHOLE_SCN)
+      Display.update()
     }
     Display.destroy()
+  }
+  def renderStage() = {
+    arcs(currArc).stage(currStage).render(gameWindow)
   }
   
 }
 
-class TestGame extends Game {
+/*class TestGame extends Game {
   def render(bounds: Rectangle) = {
     
   }
@@ -98,4 +115,4 @@ object TestGame {
   def main(args: Array[String]) = {
     (new TestGame()).play()
   }
-}
+}*/
