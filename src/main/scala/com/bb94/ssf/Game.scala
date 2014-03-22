@@ -19,7 +19,9 @@ abstract class Game(title: String = "Unnamed shooter",
   height: Int = 600) extends Renderable {
 
   val aspectRatio = gameWindow.height / gameWindow.width
-
+  
+  def glVertex2fRelative(x: Double, y: Double) = GL11.glVertex2d(x * width, y * height)
+  
   private var _difficulty: Int = _
   def difficulty = _difficulty
   def difficulty_=(newD: Int) = _difficulty = newD
@@ -86,7 +88,6 @@ abstract class Game(title: String = "Unnamed shooter",
       Display.sync(Framerate.FRAMERATE)
       Framerate.updateFPS()
       val delta = Framerate.getDelta
-      
       render(Shape.WHOLE_SCN)
       Display.update()
     }
@@ -95,7 +96,6 @@ abstract class Game(title: String = "Unnamed shooter",
   def renderStage() = {
     arcs(currArc).stage(currStage).render(gameWindow)
   }
-  
 }
 
 /*class TestGame extends Game {
