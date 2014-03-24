@@ -8,5 +8,6 @@ trait Card extends Event {
   val name: String
   val time: Double
   val isTimeLimit: Boolean
+  val isNullify: Boolean
   
 }

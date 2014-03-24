@@ -9,8 +9,11 @@ trait Boss extends Mob {
   
   val name: String
   var currTimeOnSpell: Double
-  def card: Card
-  def nextCard: Card
+  var cards: List[Card]
   override def addToStage(s: Stage) = s.bosses += this
+  override def step(delta: Int) = {
+    super.step(delta)
+    
+  }
   
 }
