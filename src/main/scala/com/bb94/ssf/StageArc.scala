@@ -6,7 +6,7 @@ package com.bb94.ssf
  * (e. g. for most of the Touhou games: stages 1 - 6 make up one arc; extra makes up another)
  * @author bluebear94
  */
-abstract class StageArc {
+abstract class StageArc extends InGame {
   
   protected val stages: Array[Stage] = Array()
   /**

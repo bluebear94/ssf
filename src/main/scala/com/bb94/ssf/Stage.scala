@@ -9,13 +9,13 @@ import scala.collection.mutable._
  * 
  * @author bluebear94
  */
-abstract class Stage extends Event with Renderable {
+abstract class Stage extends Event with Renderable with InGame {
   
   protected val _stageName = "Unnamed stage"
   private val stw: Rectangle = Rectangle(Point(0, 0), Point(0.7, 1))
   var playerBullets: ListBuffer[Bullet] = new ListBuffer
   var enemyBullets: ListBuffer[Bullet] = new ListBuffer
-  var player: Entity = _
+  var player: Player = _
   var enemies: ListBuffer[Mob] = new ListBuffer
   var bosses: ListBuffer[Boss] = new ListBuffer
   protected def _step(delta: Int) = {

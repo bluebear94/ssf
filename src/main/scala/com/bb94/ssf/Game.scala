@@ -3,6 +3,7 @@ import scala.math.BigInt
 import com.bb94.ssf.shapes._
 import org.lwjgl.opengl._
 import org.lwjgl._
+import com.bb94.ssf.entity._
 
 /**
  * A class for the whole game.
@@ -16,7 +17,8 @@ abstract class Game(title: String = "Unnamed shooter",
   gameWindow: Rectangle = Rectangle(Point(0.0, 0.0), Point(0.7, 1.0)),
   statsWindow: Rectangle = Rectangle(Point(0.7, 0.0), Point(1.0, 1.0)),
   width: Int = 800,
-  height: Int = 600) extends Renderable {
+  height: Int = 600,
+  mainScrWidth: Double = 0.7) extends Renderable {
   
   Game.width = width
   Game.height = height
@@ -83,7 +85,7 @@ abstract class Game(title: String = "Unnamed shooter",
     }
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity();
-    glOrtho(0, 800, 0, 600, 1, -1)
+    glOrtho(0, width, 0, height, 1, -1)
     glMatrixMode(GL_MODELVIEW)
     while (!Display.isCloseRequested) {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -95,10 +97,23 @@ abstract class Game(title: String = "Unnamed shooter",
     }
     Display.destroy()
   }
-  def renderStage() = {
-    arcs(currArc).stage(currStage).render(gameWindow)
+  def getCurrStage() = {
+    arcs(currArc).stage(currStage)
   }
+  def renderStage() = {
+    getCurrStage.render(gameWindow)
+  }
+  def addObj(o: InGame) = {
+    o.game = this
+    o match {
+      case o: Entity => o.addToStage(getCurrStage)
+      case _ => ()
+    }
+  }
+  def rmObj(o: InGame) = o.game = null
+  def glVertex2dRelative(x: Double, y: Double) = GL11.glVertex2d(x * width, y * height)
 }
+@Deprecated
 object Game {
   var width: Int = 800
   var height: Int = 600

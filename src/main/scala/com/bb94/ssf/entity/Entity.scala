@@ -3,7 +3,7 @@ import com.bb94.ssf.event._
 import com.bb94.ssf.hitbox._
 import com.bb94.ssf._
 
-trait Entity extends Event with Renderable {
+trait Entity extends Event with Renderable with InGame {
   
   private var _x: Double = _
   private var _y: Double = _
